@@ -1,0 +1,78 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# palap
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+The goal of palap is to provide "reflective" colour palettes. Broadly speaking, there are three categories of colour palette:
+
+1. **Qualitative**: categorical variables
+2. **Sequential**: low to high numeric values
+3. **Diverging**: negative to positive values
+
+However,a fourth colour palette is needed, to cover cases where things diverge, but maintain some constant value/meaning as they get further from the center point. The proposed name for this is a "reflective" colour palette.
+
+At the moment this package exists as a proof of concept, and a place to explore this idea. It is currently drawing heavily from [scico](https://github.com/thomasp85/scico).
+
+## Installation
+
+You can install the released version of palap from github with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("njtierney/palap")
+```
+
+# Example
+
+```{r example}
+library(palap)
+library(scales)
+show_col(palap(15), label = FALSE)
+show_col(palap(15, direction = -1), label = FALSE)
+
+show_col(palap(15, palette = "lajolla"), 
+         label = FALSE)
+show_col(palap(15, palette = "lajolla", direction = -1),
+         label = FALSE)
+```
+
+In the future there may be a magic function that allows for creation of "reflective" colour palettes - perhaps similary to [paletti](https://github.com/EdwinTh/paletti).
+
+# Example from `brolgar`
+
+```{r}
+library(dplyr)
+library(brolgar)
+heights_near <- key_slope(heights,
+          height_cm ~ year) %>%
+  keys_near(key = country,
+            var = .slope_year) %>%
+  left_join(heights, by = "country")
+
+library(ggplot2)
+ggplot(heights_near,
+       aes(x = year,
+           y = height_cm,
+           group = country,
+           colour = stat)) +
+  geom_line() +
+  scale_colour_palap_d(direction = -1)
+
+```
+
