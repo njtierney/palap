@@ -104,14 +104,27 @@ p
 
 ``` r
 
-p + scale_colour_palap_d()
+# lhs
+p + scale_colour_palap_d(palette = "bamako",
+                         begin = 0,
+                         end = 0.5)
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
 
 ``` r
 
-p + scale_colour_palap_d(direction = -1)
+# rhs?
+p + scale_colour_palap_d(palette = "bamako",
+                         begin = 0.5,
+                         end = 1)
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-3.png" width="100%" />
+
+``` r
+
+p + scale_colour_palap_d(direction = -1)
+```
+
+<img src="man/figures/README-unnamed-chunk-2-4.png" width="100%" />

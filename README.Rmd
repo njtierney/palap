@@ -75,7 +75,15 @@ p <- ggplot(heights_near,
 
 p
 
-p + scale_colour_palap_d()
+# lhs
+p + scale_colour_palap_d(palette = "bamako",
+                         begin = 0,
+                         end = 0.5)
+
+# rhs?
+p + scale_colour_palap_d(palette = "bamako",
+                         begin = 0.5,
+                         end = 1)
 
 p + scale_colour_palap_d(direction = -1)
 
