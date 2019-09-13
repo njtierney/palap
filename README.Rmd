@@ -43,12 +43,12 @@ remotes::install_github("njtierney/palap")
 ```{r example}
 library(palap)
 library(scales)
-show_col(palap(15), label = FALSE)
-show_col(palap(15, direction = -1), label = FALSE)
+show_col(palap(25), label = FALSE)
+show_col(palap(25, direction = -1), label = FALSE)
 
-show_col(palap(15, palette = "lajolla"), 
+show_col(palap(25, palette = "lajolla"), 
          label = FALSE)
-show_col(palap(15, palette = "lajolla", direction = -1),
+show_col(palap(25, palette = "lajolla", direction = -1),
          label = FALSE)
 ```
 
@@ -66,13 +66,18 @@ heights_near <- key_slope(heights,
   left_join(heights, by = "country")
 
 library(ggplot2)
-ggplot(heights_near,
+p <- ggplot(heights_near,
        aes(x = year,
            y = height_cm,
            group = country,
            colour = stat)) +
-  geom_line() +
-  scale_colour_palap_d(direction = -1)
+  geom_line()
+
+p
+
+p + scale_colour_palap_d()
+
+p + scale_colour_palap_d(direction = -1)
 
 ```
 

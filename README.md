@@ -39,27 +39,27 @@ remotes::install_github("njtierney/palap")
 ``` r
 library(palap)
 library(scales)
-show_col(palap(15), label = FALSE)
+show_col(palap(25), label = FALSE)
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
 
 ``` r
-show_col(palap(15, direction = -1), label = FALSE)
+show_col(palap(25, direction = -1), label = FALSE)
 ```
 
 <img src="man/figures/README-example-2.png" width="100%" />
 
 ``` r
 
-show_col(palap(15, palette = "lajolla"), 
+show_col(palap(25, palette = "lajolla"), 
          label = FALSE)
 ```
 
 <img src="man/figures/README-example-3.png" width="100%" />
 
 ``` r
-show_col(palap(15, palette = "lajolla", direction = -1),
+show_col(palap(25, palette = "lajolla", direction = -1),
          label = FALSE)
 ```
 
@@ -68,3 +68,50 @@ show_col(palap(15, palette = "lajolla", direction = -1),
 In the future there may be a magic function that allows for creation of
 “reflective” colour palettes - perhaps similary to
 [paletti](https://github.com/EdwinTh/paletti).
+
+# Example from `brolgar`
+
+``` r
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+library(brolgar)
+heights_near <- key_slope(heights,
+          height_cm ~ year) %>%
+  keys_near(key = country,
+            var = .slope_year) %>%
+  left_join(heights, by = "country")
+#> Warning: Outer names are only allowed for unnamed scalar atomic inputs
+
+library(ggplot2)
+p <- ggplot(heights_near,
+       aes(x = year,
+           y = height_cm,
+           group = country,
+           colour = stat)) +
+  geom_line()
+
+p
+```
+
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+
+``` r
+
+p + scale_colour_palap_d()
+```
+
+<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
+
+``` r
+
+p + scale_colour_palap_d(direction = -1)
+```
+
+<img src="man/figures/README-unnamed-chunk-2-3.png" width="100%" />
