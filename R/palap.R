@@ -1,4 +1,4 @@
-#' Reflective colour palette
+#' Symmetric colour palette
 #'
 #' This is currently just wrapping `scico::scico` with some tricks
 #'

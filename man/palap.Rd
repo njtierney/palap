@@ -2,7 +2,7 @@
 % Please edit documentation in R/palap.R
 \name{palap}
 \alias{palap}
-\title{Reflective colour palette}
+\title{Symmetric colour palette}
 \usage{
 palap(n, alpha = NULL, begin = 0, end = 1, direction = 1,
   palette = "bilbao")
