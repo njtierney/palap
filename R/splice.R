@@ -57,32 +57,28 @@ reflect_right <- function(x){
 #
 # brewer_names <-
 # list("Blues" = "blues",
-#      "BuGn" = "bg",
-#      "BuPu" = "bp",
-#      "GnBu" = "gb",
 #      "Greens" = "greens",
 #      "Greys" = "greys",
 #      "Oranges" = "oranges",
+#      "Purples" = "purples",
+#      "Reds" = "reds",
+#      "BuGn" = "bg",
+#      "BuPu" = "bp",
+#      "GnBu" = "gb",
 #      "OrRd" = "or",
 #      "PuBu" = "pb",
-#      "PuBuGn" = "pbg",
 #      "PuRd" = "pr",
-#      "Purples" = "purples",
 #      "RdPu" = "rp",
-#      "Reds" = "reds",
 #      "YlGn" = "yg",
+#      "PuBuGn" = "pbg",
 #      "YlGnBu" = "ygb",
 #      "YlOrBr" = "yob",
 #      "YlOrRd" = "yor")
 #
-# rcb_blues <- paletteer::paletteer_d(package = "RColorBrewer",
-#                                     palette = "Blues",
-#                                     n = 9)
-#
-# rcb_blues_rgb <- col_to_rgb(rcb_blues)
-#
+# ideal API would be:
 # # reflect(x, begin, end, direction)
-# reflect <- function(x,
+# reflect <- function(hex,
+#                     alpha,
 #                     begin,
 #                     end,
 #                     direction){
