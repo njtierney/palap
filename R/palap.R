@@ -24,7 +24,7 @@ palap <- function(n,
          begin = 0,
          end = 1,
          direction = 1,
-         palette = "bilbao") {
+         palette = "Blues") {
 
   if (begin < 0 | begin > 1 | end < 0 | end > 1) {
     stop("begin and end must be in [0,1]")
@@ -40,11 +40,17 @@ palap <- function(n,
     end <- tmp
   }
 
-  palette <- scico::scico_palette_data(palette)
+  # pal <- scico::scico_palette_data(palette)
 
-  map_cols <- rgb(red = palette$r,
-                  green = palette$g,
-                  blue = palette$b)
+  pal <- paletteer::paletteer_d(package = "RColorBrewer",
+                                palette = {{palette}},
+                                n = n)
+
+  map_cols <- col2rgb(pal)
+
+  # map_cols <- rgb(red = palette$r,
+  #                 green = palette$g,
+  #                 blue = palette$b)
 
   fn_cols <- colorRamp(colors = map_cols,
                        space = "Lab",

@@ -19,7 +19,9 @@ LazyData: true
 Imports: 
     scales,
     scico,
-    grDevices
+    grDevices,
+    paletteer,
+    rlang
 RoxygenNote: 6.1.1
 Suggests: 
     ggplot2
