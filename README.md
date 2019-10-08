@@ -43,32 +43,31 @@ remotes::install_github("njtierney/palap")
 
 ``` r
 library(palap)
-library(scales)
-show_col(palap(25), label = FALSE)
+library(prismatic)
+library(paletteer)
+
+regular <- paletteer_d(package = "RColorBrewer", palette = "PuBu", n = 8)
+
+# use the colour and plot functions from prismatic
+plot(colour(regular))
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
 
 ``` r
-show_col(palap(25, direction = -1), label = FALSE)
+# now show this with palap
+sym_pal <- palap(8)
+
+plot(colour(sym_pal))
 ```
 
-<img src="man/figures/README-example-2.png" width="100%" />
+<img src="man/figures/README-example-palap-1.png" width="100%" />
 
 ``` r
-
-show_col(palap(25, palette = "lajolla"), 
-         label = FALSE)
+plot(colour(palap(8, direction = -1)))
 ```
 
-<img src="man/figures/README-example-3.png" width="100%" />
-
-``` r
-show_col(palap(25, palette = "lajolla", direction = -1),
-         label = FALSE)
-```
-
-<img src="man/figures/README-example-4.png" width="100%" />
+<img src="man/figures/README-example-reverse-1.png" width="100%" />
 
 # Future work
 
@@ -113,8 +112,7 @@ p
 ``` r
 
 # lhs
-p + scale_colour_palap_d(palette = "bamako",
-                         begin = 0,
+p + scale_colour_palap_d(begin = 0,
                          end = 0.5)
 ```
 
@@ -123,8 +121,7 @@ p + scale_colour_palap_d(palette = "bamako",
 ``` r
 
 # rhs?
-p + scale_colour_palap_d(palette = "bamako",
-                         begin = 0.5,
+p + scale_colour_palap_d(begin = 0.5,
                          end = 1)
 ```
 

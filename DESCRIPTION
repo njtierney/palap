@@ -1,6 +1,6 @@
 Package: palap
-Title: Provides symmetric colour palettes
-Version: 0.0.0.9000
+Title: Provides reflective colour palettes
+Version: 0.0.0.9001
 Authors@R: 
     person(given = "Nicholas",
            family = "Tierney",
@@ -17,9 +17,11 @@ Encoding: UTF-8
 Language: es
 LazyData: true
 Imports: 
-    scales,
-    scico,
-    grDevices
+    grDevices,
+    paletteer,
+    rlang,
+    prismatic
 RoxygenNote: 6.1.1
 Suggests: 
-    ggplot2
+    ggplot2,
+    brolgar

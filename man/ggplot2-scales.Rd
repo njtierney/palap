@@ -11,22 +11,25 @@
 \title{Scales to use for ggplot2}
 \usage{
 scale_colour_palap(..., alpha = NULL, begin = 0, end = 1,
-  direction = 1, palette = "bilbao")
+  direction = 1, palette = "BuPu", package = "RColorBrewer")
 
 scale_color_palap(..., alpha = NULL, begin = 0, end = 1,
-  direction = 1, palette = "bilbao")
+  direction = 1, palette = "BuPu", package = "RColorBrewer")
 
 scale_fill_palap(..., alpha = NULL, begin = 0, end = 1,
-  direction = 1, palette = "bilbao")
+  direction = 1, palette = "BuPu", package = "RColorBrewer")
 
 scale_colour_palap_d(..., alpha = 1, begin = 0, end = 1,
-  direction = 1, palette = "batlow", aesthetics = "colour")
+  direction = 1, palette = "BuPu", package = "RColorBrewer",
+  aesthetics = "colour")
 
 scale_color_palap_d(..., alpha = 1, begin = 0, end = 1,
-  direction = 1, palette = "batlow", aesthetics = "colour")
+  direction = 1, palette = "BuPu", package = "RColorBrewer",
+  aesthetics = "colour")
 
 scale_fill_palap_d(..., alpha = 1, begin = 0, end = 1,
-  direction = 1, palette = "batlow", aesthetics = "fill")
+  direction = 1, palette = "BuPu", package = "RColorBrewer",
+  aesthetics = "fill")
 }
 \arguments{
 \item{...}{Arguments to pass on to `ggplot2::scale_colour_gradientn()`,
@@ -44,8 +47,11 @@ Defaults to `0` and `1` respectively}
 
 \item{direction}{Either `1` or `-1`. If `-1` the palette will be reversed}
 
-\item{palette}{The name of the palette to sample from. See
-`scico::scico_palette_names` for a list of possible names}
+\item{palette}{The name of the palette to sample from from the `package`. See
+`paletteer::palettes_d_names` for a list of possible names. Default is
+"BuPu" from RColorBrewer}
+
+\item{package}{The package to take the palette from}
 
 \item{aesthetics}{Character string or vector of character strings listing the
 name(s) of the aesthetic(s) that this scale works with. This can be useful,
@@ -57,23 +63,13 @@ A `ScaleContinuous` or `ScaleDiscrete` object that can be added to a
   `ggplot` object
 }
 \description{
-These functions provide the option to use the scico/palap palettes along
+These functions provide the option to use the palettes from `paletteer` along
    with the `ggplot2` package. It goes without saying that it requires
    `ggplot2` to work.
 }
 \examples{
 
 if (require('ggplot2')) {
-  volcano <- data.frame(
-    x = rep(seq_len(ncol(volcano)), each = nrow(volcano)),
-    y = rep(seq_len(nrow(volcano)), ncol(volcano)),
-    height = as.vector(volcano)
-  )
-
-  ggplot(volcano, aes(x = x, y = y, fill = height)) +
-    geom_raster() +
-    scale_fill_palap(palette = 'tokyo')
-
   ggplot(iris, aes(x=Petal.Width, y=Petal.Length)) +
     geom_point(aes(color=Species), size=10) +
     scale_colour_palap_d()
