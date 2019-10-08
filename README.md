@@ -122,6 +122,9 @@ are sequential.
 
 # example with lm
 
+You might want to fit a linear model and add two levels of confidence
+intervals.
+
 ``` r
 lm_fit <- lm(speed ~ dist, cars)
 conf_int <- function(x, conf_level){
@@ -159,7 +162,32 @@ lm_conf <- conf_int(lm_fit, 0.95) %>%
                                       "upr_80",
                                       "upr_95"),
                            ordered = TRUE))
-  
+```
+
+So your data ends up looking like this:
+
+``` r
+lm_conf
+#> # A tibble: 200 x 5
+#>      fit speed  dist conf_var conf_val
+#>    <dbl> <dbl> <dbl> <ord>       <dbl>
+#>  1  8.62     4     2 lwr_95       6.92
+#>  2  8.62     4     2 upr_95      10.3 
+#>  3  8.62     4     2 lwr_80       7.52
+#>  4  8.62     4     2 upr_80       9.71
+#>  5  9.94     4    10 lwr_95       8.47
+#>  6  9.94     4    10 upr_95      11.4 
+#>  7  9.94     4    10 lwr_80       8.99
+#>  8  9.94     4    10 upr_80      10.9 
+#>  9  8.95     7     4 lwr_95       7.31
+#> 10  8.95     7     4 upr_95      10.6 
+#> # … with 190 more rows
+```
+
+But then when you plot it as some separate lines for each level of
+confidence, you get this:
+
+``` r
 library(ggplot2)
 gg_conf <- 
 ggplot(lm_conf,
@@ -174,17 +202,17 @@ ggplot(lm_conf,
 gg_conf
 ```
 
-<img src="man/figures/README-loing-example-of-lm-1.png" width="100%" />
+<img src="man/figures/README-gg-lm-no-palap-1.png" width="100%" />
+
+But using palap, you get a nicer colourscale
 
 ``` r
-
-
 # with palap - scales are ordered in a way that makes sense
 gg_conf +
-  scale_colour_palap_d(begin = 0.5)
+  scale_colour_palap_d()
 ```
 
-<img src="man/figures/README-loing-example-of-lm-2.png" width="100%" />
+<img src="man/figures/README-gg-palap-1.png" width="100%" />
 
 # Example from `brolgar`
 

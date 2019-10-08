@@ -102,7 +102,9 @@ For symmetric colour scales we recommend that you use colour scales that are seq
 
 # example with lm
 
-```{r loing-example-of-lm}
+You might want to fit a linear model and add two levels of confidence intervals.
+
+```{r long-example-of-lm}
 lm_fit <- lm(speed ~ dist, cars)
 conf_int <- function(x, conf_level){
   predict(x,
@@ -131,7 +133,17 @@ lm_conf <- conf_int(lm_fit, 0.95) %>%
                                       "upr_80",
                                       "upr_95"),
                            ordered = TRUE))
-  
+```
+
+So your data ends up looking like this:
+
+```{r show-lm-conf}
+lm_conf
+```
+
+But then when you plot it as some separate lines for each level of confidence, you get this:
+
+```{r gg-lm-no-palap}
 library(ggplot2)
 gg_conf <- 
 ggplot(lm_conf,
@@ -144,11 +156,14 @@ ggplot(lm_conf,
 
 # without palap - the bands aren't really ordered in a meaningful way
 gg_conf
+```
 
+But using palap, you get a nicer colourscale
 
+```{r gg-palap}
 # with palap - scales are ordered in a way that makes sense
 gg_conf +
-  scale_colour_palap_d(begin = 0.5)
+  scale_colour_palap_d()
 ```
 
 
