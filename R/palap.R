@@ -1,13 +1,16 @@
-#' Symmetric colour palette
+#' Symmetric colour palettes
 #'
-#' This is currently just wrapping `scico::scico` with some tricks
+#' A fourth type of colour palette is needed to cover cases where things
+#'   diverge, but maintain some constant value/meaning as they get further from
+#'   the center point. The proposed name for this is a "symmetric" colour
+#'   palette. This is currently just wrapping `scico::scico` with some tricks
 #'
 #' @param n The number of colours to generate for the palette
 #' @param alpha The opacity of the generated colours. If specified rgba values
-#' will be generated. The default (`NULL`) will generate rgb values which
-#' corresponds to `alpha = 1`
+#'   will be generated. The default (`NULL`) will generate rgb values which
+#'   corresponds to `alpha = 1`
 #' @param begin,end The interval within the palette to sample colours from.
-#' Defaults to `0` and `1` respectively
+#'   Defaults to `0` and `1` respectively
 #' @param direction Either `1` or `-1`. If `-1` the palette will be reversed
 #' @param palette The name of the palette to sample from from the `package`. See
 #'   `paletteer::palettes_d_names` for a list of possible names. Default is

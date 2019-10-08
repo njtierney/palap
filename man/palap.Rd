@@ -2,7 +2,7 @@
 % Please edit documentation in R/palap.R
 \name{palap}
 \alias{palap}
-\title{Symmetric colour palette}
+\title{Symmetric colour palettes}
 \usage{
 palap(n, alpha = NULL, begin = 0, end = 1, direction = 1,
   palette = "PuBu", package = "RColorBrewer")
@@ -29,7 +29,10 @@ Defaults to `0` and `1` respectively}
 A character vector of length `n` with hexencoded rgb(a) colour values
 }
 \description{
-This is currently just wrapping `scico::scico` with some tricks
+A fourth type of colour palette is needed to cover cases where things
+  diverge, but maintain some constant value/meaning as they get further from
+  the center point. The proposed name for this is a "symmetric" colour
+  palette. This is currently just wrapping `scico::scico` with some tricks
 }
 \examples{
 library(prismatic)
