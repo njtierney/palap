@@ -1,6 +1,6 @@
 Package: palap
 Title: Provides reflective colour palettes
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person(given = "Nicholas",
            family = "Tierney",
