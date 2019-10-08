@@ -17,11 +17,11 @@ Encoding: UTF-8
 Language: es
 LazyData: true
 Imports: 
-    scales,
-    scico,
     grDevices,
     paletteer,
-    rlang
+    rlang,
+    prismatic
 RoxygenNote: 6.1.1
 Suggests: 
-    ggplot2
+    ggplot2,
+    brolgar

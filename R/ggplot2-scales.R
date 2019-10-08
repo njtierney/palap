@@ -1,6 +1,6 @@
 #' Scales to use for ggplot2
 #'
-#' These functions provide the option to use the scico/palap palettes along
+#' These functions provide the option to use the palettes from `paletteer` along
 #'    with the `ggplot2` package. It goes without saying that it requires
 #'    `ggplot2` to work.
 #'
@@ -22,16 +22,6 @@
 #' @examples
 #'
 #' if (require('ggplot2')) {
-#'   volcano <- data.frame(
-#'     x = rep(seq_len(ncol(volcano)), each = nrow(volcano)),
-#'     y = rep(seq_len(nrow(volcano)), ncol(volcano)),
-#'     height = as.vector(volcano)
-#'   )
-#'
-#'   ggplot(volcano, aes(x = x, y = y, fill = height)) +
-#'     geom_raster() +
-#'     scale_fill_palap(palette = 'tokyo')
-#'
 #'   ggplot(iris, aes(x=Petal.Width, y=Petal.Length)) +
 #'     geom_point(aes(color=Species), size=10) +
 #'     scale_colour_palap_d()
@@ -48,7 +38,8 @@ scale_colour_palap <- function(...,
                                begin = 0,
                                end = 1,
                                direction = 1,
-                               palette = "bilbao") {
+                               palette = "BuPu",
+                               package = "RColorBrewer") {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop('ggplot2 is required for this functionality', call. = FALSE)
@@ -59,7 +50,8 @@ scale_colour_palap <- function(...,
                                                   begin,
                                                   end,
                                                   direction,
-                                                  palette), ...)
+                                                  {{ palette }},
+                                                  {{ package }}), ...)
 }
 #' @rdname ggplot2-scales
 #' @export
@@ -73,7 +65,8 @@ scale_fill_palap <- function(...,
                              begin = 0,
                              end = 1,
                              direction = 1,
-                             palette = "bilbao") {
+                             palette = "BuPu",
+                             package = "RColorBrewer") {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop('ggplot2 is required for this functionality', call. = FALSE)
@@ -83,7 +76,8 @@ scale_fill_palap <- function(...,
                                                 begin,
                                                 end,
                                                 direction,
-                                                palette),
+                                                {{ palette }},
+                                                {{ package }}),
                                 ...)
 }
 
@@ -100,24 +94,24 @@ scale_colour_palap_d <-
            begin = 0,
            end = 1,
            direction = 1,
-           palette = 'batlow',
+           palette = 'BuPu',
+           package = "RColorBrewer",
            aesthetics = "colour") {
 
 
-    # initial checks (direction and beg/end are already checked with scico::scico)
-    if (!requireNamespace("ggplot2", quietly = TRUE)) {
-      stop('ggplot2 is required for this functionality', call. = FALSE)
-    }
-
-    if (alpha < 0 | alpha > 1) stop('alpha must be in [0,1]')
-
-    if (!palette %in% scico::scico_palette_names()) {
-      stop('Need to pick a scico palette')
-    }
+    # initial checks (direction and beg/end are already checked with palap)
+    is_ggplot_available()
+    is_alpha_in_01(alpha)
+    is_palette_in_paletteer(palette)
 
     ggplot2::discrete_scale(aesthetics,
                             "palap_d",
-                            palap_discrete(alpha, begin, end, direction, palette),
+                            palap_discrete(alpha,
+                                           begin,
+                                           end,
+                                           direction,
+                                           {{ palette }},
+                                           {{ package }}),
                             ...)
   }
 
@@ -135,29 +129,40 @@ scale_fill_palap_d <- function(...,
                                begin = 0,
                                end = 1,
                                direction = 1,
-                               palette = 'batlow',
+                               palette = "BuPu",
+                               package = "RColorBrewer",
                                aesthetics = "fill") {
 
-  # initial checks (direction and beg/end are already checked with scico::scico)
-  if (!requireNamespace("ggplot2", quietly = TRUE)) {
-    stop('ggplot2 is required for this functionality', call. = FALSE)
-  }
-
-  if (alpha < 0 | alpha > 1) stop('alpha must be in [0,1]')
-
-  if (!palette %in% scico::scico_palette_names()){
-    stop('Need to pick a scico palette')
-  }
+  # initial checks (direction and beg/end are already checked with palap)
+  is_ggplot_available()
+  is_alpha_in_01(alpha)
+  is_palette_in_paletteer(palette)
 
   ggplot2::discrete_scale(aesthetics,
                           "palap_d",
-                          palap_discrete(alpha, begin, end, direction, palette),
+                          palap_discrete(alpha,
+                                         begin,
+                                         end,
+                                         direction,
+                                         {{ palette }},
+                                         {{ package }}),
                           ...)
 }
 
 
-palap_discrete <- function(alpha, begin, end, direction, palette) {
+palap_discrete <- function(alpha,
+                           begin,
+                           end,
+                           direction,
+                           palette,
+                           package) {
   function(n) {
-    palap(n, alpha, begin, end, direction, palette)
+    palap(n,
+          alpha,
+          begin,
+          end,
+          direction,
+          {{ palette }},
+          {{ package }})
   }
 }

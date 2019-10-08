@@ -5,7 +5,7 @@
 \title{Reflective colour palette}
 \usage{
 palap(n, alpha = NULL, begin = 0, end = 1, direction = 1,
-  palette = "bilbao")
+  palette = "PuBu", package = "RColorBrewer")
 }
 \arguments{
 \item{n}{The number of colours to generate for the palette}
@@ -19,8 +19,11 @@ Defaults to `0` and `1` respectively}
 
 \item{direction}{Either `1` or `-1`. If `-1` the palette will be reversed}
 
-\item{palette}{The name of the palette to sample from. See
-`scico::scico_palette_names` for a list of possible names}
+\item{palette}{The name of the palette to sample from from the `package`. See
+`paletteer::palettes_d_names` for a list of possible names. Default is
+"BuPu" from RColorBrewer}
+
+\item{package}{The package to take the palette from}
 }
 \value{
 A character vector of length `n` with hexencoded rgb(a) colour values
@@ -29,7 +32,7 @@ A character vector of length `n` with hexencoded rgb(a) colour values
 This is currently just wrapping `scico::scico` with some tricks
 }
 \examples{
-library(scales)
-show_col(palap(12), label = FALSE)
-show_col(palap(12, direction = -1), label = FALSE)
+library(prismatic)
+plot(colour(palap(8)))
+plot(colour(palap(8, direction = -1)))
 }

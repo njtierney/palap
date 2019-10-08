@@ -42,17 +42,30 @@ remotes::install_github("njtierney/palap")
 
 ```{r example}
 library(palap)
-library(scales)
-show_col(palap(25), label = FALSE)
-show_col(palap(25, direction = -1), label = FALSE)
+library(prismatic)
+library(paletteer)
 
-show_col(palap(25, palette = "lajolla"), 
-         label = FALSE)
-show_col(palap(25, palette = "lajolla", direction = -1),
-         label = FALSE)
+regular <- paletteer_d(package = "RColorBrewer", palette = "PuBu", n = 8)
+
+# use the colour and plot functions from prismatic
+plot(colour(regular))
+```
+
+
+```{r example-palap}
+# now show this with palap
+sym_pal <- palap(8)
+
+plot(colour(sym_pal))
+```
+
+
+```{r example-reverse}
+plot(colour(palap(8, direction = -1)))
 ```
 
 In the future there may be a magic function that allows for creation of "reflective" colour palettes - perhaps similary to [paletti](https://github.com/EdwinTh/paletti).
+
 
 # Example from `brolgar`
 
@@ -76,13 +89,11 @@ p <- ggplot(heights_near,
 p
 
 # lhs
-p + scale_colour_palap_d(palette = "bamako",
-                         begin = 0,
+p + scale_colour_palap_d(begin = 0,
                          end = 0.5)
 
 # rhs?
-p + scale_colour_palap_d(palette = "bamako",
-                         begin = 0.5,
+p + scale_colour_palap_d(begin = 0.5,
                          end = 1)
 
 p + scale_colour_palap_d(direction = -1)
