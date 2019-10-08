@@ -7,10 +7,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "nicholas.tierney@gmail.com",
            comment = c(ORCID = "https://orcid.org/0000-0003-1460-8722"))
-Description: Reflective colour palettes can be used in specific cases when 
+Description: Symmetric colour palettes can be used in specific cases when 
   you need values tha are above and below the middle point that have different
   values, but similar meaning. For example, the first and third quantiles. You
-  can think of reflective colour palettes as a combination of sequential and
+  can think of symmetric colour palettes as a combination of sequential and
   diverging colour palettes.
 License: MIT + file LICENSE
 Encoding: UTF-8

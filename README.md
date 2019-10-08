@@ -9,17 +9,22 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of palap is to provide “reflective” colour palettes. Broadly
+The goal of palap is to provide “symmetric” colour palettes. Broadly
 speaking, there are three categories of colour palette:
 
-1.  **Qualitative**: categorical variables
-2.  **Sequential**: low to high numeric values
-3.  **Diverging**: negative to positive values
+1\. **Qualitative**: categorical variables
 
-However,a fourth colour palette is needed, to cover cases where things
+2\. **Sequential**: low to high numeric values
+
+3\. **Diverging**: negative to positive values
+
+However, a fourth colour palette is needed, to cover cases where things
 diverge, but maintain some constant value/meaning as they get further
-from the center point. The proposed name for this is a “reflective”
-colour palette.
+from the center point. The proposed name for this is a “symmetric”
+colour palette:
+
+4\. **Symmetric**: Diverging values with equivalent meaning as they get
+further from the diverging point.
 
 At the moment this package exists as a proof of concept, and a place to
 explore this idea. It is currently drawing heavily from
@@ -27,7 +32,7 @@ explore this idea. It is currently drawing heavily from
 
 ## Installation
 
-You can install the released version of palap from github with:
+You can install the released version of `palap` from github with:
 
 ``` r
 # install.packages("remotes")
@@ -64,9 +69,12 @@ plot(colour(palap(8, direction = -1)))
 
 <img src="man/figures/README-example-reverse-1.png" width="100%" />
 
-In the future there may be a magic function that allows for creation of
-“reflective” colour palettes - perhaps similary to
-[paletti](https://github.com/EdwinTh/paletti).
+# Future work
+
+It will be possible to generate your own symmetric colour palette from a
+given vector of colours.
+
+  - perhaps similary to [paletti](https://github.com/EdwinTh/paletti).
 
 # Example from `brolgar`
 
@@ -125,3 +133,11 @@ p + scale_colour_palap_d(direction = -1)
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-4.png" width="100%" />
+
+# Acknowledgements
+
+Thank you to [Di Cook](http://dicook.org/) for pointing out the need for
+this kind of colour palette, it is one of those things that once you
+notice, you cannot unsee, and that’s so cool. Thanks also to [Alison
+Hill](https://alison.rbind.io/) for pointing out that I could call this
+“symmetric” instead of “reflective” - to me this is much clearer.
