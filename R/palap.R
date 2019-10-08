@@ -14,7 +14,7 @@
 #' @param direction Either `1` or `-1`. If `-1` the palette will be reversed
 #' @param palette The name of the palette to sample from from the `package`. See
 #'   `paletteer::palettes_d_names` for a list of possible names. Default is
-#'   "BuPu" from RColorBrewer
+#'   "YlGnBu" (Yellow, Green, Blue) from RColorBrewer
 #' @param package The package to take the palette from
 #'
 #' @return A character vector of length `n` with hexencoded rgb(a) colour values
@@ -29,7 +29,7 @@ palap <- function(n,
          begin = 0,
          end = 1,
          direction = 1,
-         palette = "PuBu",
+         palette = "YlGnBu",
          package = "RColorBrewer") {
 
   if (begin < 0 | begin > 1 | end < 0 | end > 1) {
@@ -84,6 +84,12 @@ palap <- function(n,
         maxColorValue = 255)
   }
 
-  hex_cols[-middle(hex_cols)]
+  if (is_odd(n)) {
+    return(hex_cols[-middle(hex_cols)])
+  }
+
+  if (is_even(n)) {
+    return(hex_cols)
+  }
 
 }

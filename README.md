@@ -41,12 +41,15 @@ remotes::install_github("njtierney/palap")
 
 # Example
 
+We can see a normal sequential colourplot such as the Yellow Green Blue
+palette here:
+
 ``` r
 library(palap)
 library(prismatic)
 library(paletteer)
 
-regular <- paletteer_d(package = "RColorBrewer", palette = "PuBu", n = 8)
+regular <- paletteer_d(package = "RColorBrewer", palette = "YlGnBu", n = 7)
 
 # use the colour and plot functions from prismatic
 plot(colour(regular))
@@ -54,31 +57,83 @@ plot(colour(regular))
 
 <img src="man/figures/README-example-1.png" width="100%" />
 
+Using `palap`, we can create a symmetric version of this colour palette
+
 ``` r
 # now show this with palap
-sym_pal <- palap(8)
+sym_pal <- palap(7)
 
 plot(colour(sym_pal))
 ```
 
 <img src="man/figures/README-example-palap-1.png" width="100%" />
 
+We can also change the direction of the colourscale
+
 ``` r
-plot(colour(palap(8, direction = -1)))
+plot(colour(palap(7, direction = -1)))
 ```
 
 <img src="man/figures/README-example-reverse-1.png" width="100%" />
 
-# Future work
-
-It will be possible to generate your own symmetric colour palette from a
-given vector of colours.
-
-  - perhaps similary to [paletti](https://github.com/EdwinTh/paletti).
-
-# Example from `brolgar`
+Note that when an even number is given, the colour palette will be
+“doubled” - like so:
 
 ``` r
+plot(colour(palap(8)))
+```
+
+<img src="man/figures/README-palap-even-1.png" width="100%" />
+
+``` r
+plot(colour(palap(8, direction = -1)))
+```
+
+<img src="man/figures/README-palap-even-2.png" width="100%" />
+
+# Using other colour palettes
+
+Thanks to [`paletteer`](https://github.com/EmilHvitfeldt/paletteer) by
+[Emil Hvitfeldt](https://github.com/EmilHvitfeldt), you can use a wide
+variety of colour palettes from other packages.
+
+By default it uses `RColorBrewer` and the Yellow Green Blue colour
+(YlGnBu) colour palette.
+
+You could change this so that you can consider the Blue Purple (BuPu)
+palette:
+
+``` r
+plot(colour(palap(7, palette = "BuPu")))
+```
+
+<img src="man/figures/README-show-blue-purple-1.png" width="100%" />
+
+For symmetric colour scales we recommend that you use colour scales that
+are sequential.
+
+# Future work
+
+  - Generalise across other packages, only using sequential colour
+    palettes.
+  - Generate your own symmetric colour palette from a given vector of
+    colours - perhaps similarly to
+    [paletti](https://github.com/EdwinTh/paletti).
+
+# example with lm
+
+``` r
+lm_fit <- lm(speed ~ dist, cars)
+conf_int <- function(x, conf_level){
+  predict(x,
+          interval = c("confidence"),
+          level = conf_level) %>% 
+    tibble::as_tibble() %>% 
+    setNames(c("fit",
+               paste0("lwr_",conf_level*100),
+               paste0("upr_",conf_level*100)))
+}
+
 library(dplyr)
 #> 
 #> Attaching package: 'dplyr'
@@ -88,6 +143,53 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
+library(tidyr)
+library(tibble)
+
+lm_conf <- conf_int(lm_fit, 0.95) %>%
+  bind_cols(conf_int(lm_fit, 0.80)) %>%
+  bind_cols(cars) %>%
+  select(-fit1) %>% 
+  pivot_longer(cols = c(lwr_95:upr_80), 
+               names_to = "conf_var",
+               values_to = "conf_val") %>%
+  mutate(conf_var = factor(x = conf_var,
+                           levels = c("lwr_95",
+                                      "lwr_80",
+                                      "upr_80",
+                                      "upr_95"),
+                           ordered = TRUE))
+  
+library(ggplot2)
+gg_conf <- 
+ggplot(lm_conf,
+       aes(x = dist,
+           y = speed)) + 
+  geom_point() + 
+  geom_line(aes(y = fit)) + 
+  geom_line(aes(y = conf_val,
+                colour = conf_var))
+
+# without palap - the bands aren't really ordered in a meaningful way
+gg_conf
+```
+
+<img src="man/figures/README-loing-example-of-lm-1.png" width="100%" />
+
+``` r
+
+
+# with palap - scales are ordered in a way that makes sense
+gg_conf +
+  scale_colour_palap_d(begin = 0.5)
+```
+
+<img src="man/figures/README-loing-example-of-lm-2.png" width="100%" />
+
+# Example from `brolgar`
+
+``` r
+library(dplyr)
 library(brolgar)
 heights_near <- key_slope(heights,
           height_cm ~ year) %>%
@@ -107,32 +209,21 @@ p <- ggplot(heights_near,
 p
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-brolgar-1.png" width="100%" />
 
 ``` r
 
-# lhs
-p + scale_colour_palap_d(begin = 0,
-                         end = 0.5)
+p + scale_colour_palap_d()
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
-
-``` r
-
-# rhs?
-p + scale_colour_palap_d(begin = 0.5,
-                         end = 1)
-```
-
-<img src="man/figures/README-unnamed-chunk-2-3.png" width="100%" />
+<img src="man/figures/README-brolgar-2.png" width="100%" />
 
 ``` r
 
 p + scale_colour_palap_d(direction = -1)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-4.png" width="100%" />
+<img src="man/figures/README-brolgar-3.png" width="100%" />
 
 # Acknowledgements
 

@@ -38,7 +38,7 @@ scale_colour_palap <- function(...,
                                begin = 0,
                                end = 1,
                                direction = 1,
-                               palette = "BuPu",
+                               palette = "YlGnBu",
                                package = "RColorBrewer") {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
@@ -65,7 +65,7 @@ scale_fill_palap <- function(...,
                              begin = 0,
                              end = 1,
                              direction = 1,
-                             palette = "BuPu",
+                             palette = "YlGnBu",
                              package = "RColorBrewer") {
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
@@ -94,7 +94,7 @@ scale_colour_palap_d <-
            begin = 0,
            end = 1,
            direction = 1,
-           palette = 'BuPu',
+           palette = 'YlGnBu',
            package = "RColorBrewer",
            aesthetics = "colour") {
 
@@ -129,7 +129,7 @@ scale_fill_palap_d <- function(...,
                                begin = 0,
                                end = 1,
                                direction = 1,
-                               palette = "BuPu",
+                               palette = "YlGnBu",
                                package = "RColorBrewer",
                                aesthetics = "fill") {
 

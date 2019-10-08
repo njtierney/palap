@@ -5,7 +5,7 @@
 \title{Symmetric colour palettes}
 \usage{
 palap(n, alpha = NULL, begin = 0, end = 1, direction = 1,
-  palette = "PuBu", package = "RColorBrewer")
+  palette = "YlGnBu", package = "RColorBrewer")
 }
 \arguments{
 \item{n}{The number of colours to generate for the palette}
@@ -21,7 +21,7 @@ Defaults to `0` and `1` respectively}
 
 \item{palette}{The name of the palette to sample from from the `package`. See
 `paletteer::palettes_d_names` for a list of possible names. Default is
-"BuPu" from RColorBrewer}
+"YlGnBu" (Yellow, Green, Blue) from RColorBrewer}
 
 \item{package}{The package to take the palette from}
 }

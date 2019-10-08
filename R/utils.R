@@ -14,6 +14,9 @@ is_palette_in_paletteer <- function(palette){
   }
 }
 
+is_odd <- function(x) !identical(x %% 2, 0)
+
+is_even <- function(x) !is_odd(x)
 
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 globalVariables(

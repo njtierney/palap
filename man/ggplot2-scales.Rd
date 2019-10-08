@@ -11,24 +11,24 @@
 \title{Scales to use for ggplot2}
 \usage{
 scale_colour_palap(..., alpha = NULL, begin = 0, end = 1,
-  direction = 1, palette = "BuPu", package = "RColorBrewer")
+  direction = 1, palette = "YlGnBu", package = "RColorBrewer")
 
 scale_color_palap(..., alpha = NULL, begin = 0, end = 1,
-  direction = 1, palette = "BuPu", package = "RColorBrewer")
+  direction = 1, palette = "YlGnBu", package = "RColorBrewer")
 
 scale_fill_palap(..., alpha = NULL, begin = 0, end = 1,
-  direction = 1, palette = "BuPu", package = "RColorBrewer")
+  direction = 1, palette = "YlGnBu", package = "RColorBrewer")
 
 scale_colour_palap_d(..., alpha = 1, begin = 0, end = 1,
-  direction = 1, palette = "BuPu", package = "RColorBrewer",
+  direction = 1, palette = "YlGnBu", package = "RColorBrewer",
   aesthetics = "colour")
 
 scale_color_palap_d(..., alpha = 1, begin = 0, end = 1,
-  direction = 1, palette = "BuPu", package = "RColorBrewer",
+  direction = 1, palette = "YlGnBu", package = "RColorBrewer",
   aesthetics = "colour")
 
 scale_fill_palap_d(..., alpha = 1, begin = 0, end = 1,
-  direction = 1, palette = "BuPu", package = "RColorBrewer",
+  direction = 1, palette = "YlGnBu", package = "RColorBrewer",
   aesthetics = "fill")
 }
 \arguments{
@@ -49,7 +49,7 @@ Defaults to `0` and `1` respectively}
 
 \item{palette}{The name of the palette to sample from from the `package`. See
 `paletteer::palettes_d_names` for a list of possible names. Default is
-"BuPu" from RColorBrewer}
+"YlGnBu" (Yellow, Green, Blue) from RColorBrewer}
 
 \item{package}{The package to take the palette from}
 
