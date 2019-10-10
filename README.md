@@ -7,6 +7,12 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/njtierney/palap?branch=master&svg=true)](https://ci.appveyor.com/project/njtierney/palap)
+[![Travis build
+status](https://travis-ci.org/njtierney/palap.svg?branch=master)](https://travis-ci.org/njtierney/palap)
+[![Codecov test
+coverage](https://codecov.io/gh/njtierney/palap/branch/master/graph/badge.svg)](https://codecov.io/gh/njtierney/palap?branch=master)
 <!-- badges: end -->
 
 The goal of palap is to provide “symmetric” colour palettes. Broadly
