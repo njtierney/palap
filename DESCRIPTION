@@ -26,4 +26,4 @@ Suggests:
     ggplot2,
     covr
 Remotes:
-    njtierney/brolgar (>= 0.0.5.9100)
+    njtierney/brolgar
